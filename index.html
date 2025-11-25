@@ -12,10 +12,9 @@
       padding: 0;
       color: #fff;
       overflow-x: hidden;
-      overflow-y: hidden; /* prevent scrolling */
+      overflow-y: hidden;
     }
 
-    /* 🌌 Night sky background */
     body::before {
       content: "";
       position: fixed;
@@ -25,7 +24,6 @@
       z-index: -2;
     }
 
-    /* Twinkling stars */
     .stars {
       position: fixed;
       width: 100%; height: 100%;
@@ -46,7 +44,6 @@
       font-weight: 600;
       font-family: 'Georgia', serif;
       padding: 6px 10px;
-      margin: 0;
       border-top: 2px solid #ffb6c1;
       border-bottom: 2px solid #ffb6c1;
     }
@@ -79,12 +76,11 @@
 
     .mySlides img {
       width: 100%;
-      max-height: 50vh;   /* 👈 limit image height to half screen */
-      object-fit: cover;  /* 👈 ensures image covers nicely */
+      max-height: 50vh;
+      object-fit: cover;
       border-radius: 12px;
     }
 
-    /* 💖 Surprise Button */
     .surprise-btn {
       background: #ff4d6d;
       color: #fff;
@@ -102,7 +98,6 @@
       box-shadow: 0 0 18px rgba(255,77,109,1);
     }
 
-    /* ✨ Quotes (fade in + centered) */
     .hidden-message {
       display: none;
       margin-top: 10px;
@@ -117,20 +112,12 @@
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-
     .show {
       display: block;
       opacity: 1;
     }
 
-    footer {
-      margin: 10px 0;
-      font-size: 0.9rem;
-      color: #ddd;
-      font-weight: 500;
-    }
-
-    /* ❤️ Rising Hearts */
+    /* ❤️ Rising hearts */
     .touch-heart {
       position: absolute;
       font-size: 14px;
@@ -143,105 +130,311 @@
       0% { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
     }
+
+    /* --------------------------------------------------------- */
+    /* 🌟 NEW OVERLAY ANIMATION – WEDDING DAY 💖 */
+    /* --------------------------------------------------------- */
+    #weddingOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .big-text {
+      font-size: 2rem;
+      color: #ffb6c1;
+      font-family: 'Georgia';
+      text-shadow: 0 0 20px #ff4d6d;
+      opacity: 0;
+      animation: textAppear 3s ease forwards;
+    }
+
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes textAppear { from {opacity:0;} to {opacity:1;} }
+
+    /* Floating hearts for overlay */
+    .heart {
+      position: absolute;
+      color: pink;
+      font-size: 18px;
+      animation: floatUp 4s ease-in infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(50px); opacity: 0.2; }
+      100% { transform: translateY(-500px); opacity: 0; }
+    }
+
+    /* --------------------------------------------------------- */
+    /* 💌 LOVE LETTER POPUP */
+    /* --------------------------------------------------------- */
+    #loveLetter {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 450px;
+      background: rgba(255,255,255,0.95);
+      padding: 20px;
+      border-radius: 15px;
+      color: #333;
+      font-family: 'Georgia';
+      z-index: 10000;
+      box-shadow: 0 0 20px rgba(255,77,109,0.7);
+    }
+
+    #storyStartBtn {
+      margin-top: 15px;
+      background: #ff4d6d;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* --------------------------------------------------------- */
+    /* 📖 STORY SLIDESHOW (overlay mode) */
+    /* --------------------------------------------------------- */
+    #storyOverlay {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 10001;
+      color: white;
+      padding: 30px 15px;
+      text-align: center;
+      font-family: 'Georgia';
+    }
+
+    #storyImg {
+      width: 80%;
+      max-width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255,77,109,0.7);
+    }
+
+    #storyCaption {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      line-height: 1.4;
+    }
+    
   </style>
 </head>
 <body>
 
-  <!-- Stars background -->
-  <div class="stars"></div>
+<div class="stars"></div>
 
-  <!-- Banner -->
-  <div class="banner">💍 Save the Date — 29th November 2025 💌</div>
+<div class="banner">💍 Save the Date — 29th November 2025 💌</div>
 
-  <div class="container">
-    <h1>❤️ Shubham & Priya ❤️ </h1>
-    <div id="countdown"></div>
+<h1>❤️ Shubham & Priya ❤️ </h1>
+<div id="countdown">Loading...</div>
 
-    <!-- Slideshow -->
-    <div class="slideshow-container">
-      <div class="mySlides fade"><img src="P6.jpg" alt="Memory 1"></div>
-      <div class="mySlides fade"><img src="P7_1.jpg" alt="Memory 2"></div>
-      <div class="mySlides fade"><img src="P8.jpg" alt="Memory 3"></div>
-      <div class="mySlides fade"><img src="P9.jpg" alt="Memory 4"></div>
-      <div class="mySlides fade"><img src="P10.jpg" alt="Memory 5"></div>
-      <div class="mySlides fade"><img src="P13.jpg" alt="Memory 6"></div>
-      <div class="mySlides fade"><img src="P14.jpg" alt="Memory 7"></div>
-    </div>
+<!-- Existing slideshow -->
+<div class="slideshow-container">
+  <div class="mySlides fade"><img src="P6.jpg"></div>
+  <div class="mySlides fade"><img src="P7_1.jpg"></div>
+  <div class="mySlides fade"><img src="P8.jpg"></div>
+  <div class="mySlides fade"><img src="P9.jpg"></div>
+  <div class="mySlides fade"><img src="P10.jpg"></div>
+  <div class="mySlides fade"><img src="P13.jpg"></div>
+  <div class="mySlides fade"><img src="P14.jpg"></div>
+</div>
 
-    <!-- 💖 Surprise Button -->
-    <button class="surprise-btn" onclick="showNextQuote()">Click Me 💌</button>
-    <div class="hidden-message" id="hiddenMessage"></div>
-  </div>
+<button class="surprise-btn" onclick="showNextQuote()">Click Me 💌</button>
+<div class="hidden-message" id="hiddenMessage"></div>
 
-  <script>
-    // Countdown
-    const weddingDate = new Date("Nov 29, 2025 00:00:00").getTime();
-    const countdownEl = document.getElementById("countdown");
+<!-- --------------------------------------------------------- -->
+<!-- 🌟 NEW: Wedding Day Animation -->
+<!-- --------------------------------------------------------- -->
+<div id="weddingOverlay">
+  <div class="big-text">Priya… Today our forever begins ❤️</div>
+</div>
 
-    setInterval(function() {
-      const now = new Date().getTime();
-      const distance = weddingDate - now;
+<!-- --------------------------------------------------------- -->
+<!-- 💌 LOVE LETTER POPUP -->
+<!-- --------------------------------------------------------- -->
+<div id="loveLetter">
+  <div id="typedText"></div>
+  <button id="storyStartBtn" onclick="startStory()">Read Our Story ➜</button>
+</div>
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+<!-- --------------------------------------------------------- -->
+<!-- 📖 STORY OVERLAY -->
+<!-- --------------------------------------------------------- -->
+<div id="storyOverlay">
+  <img id="storyImg" src="">
+  <div id="storyCaption"></div>
+</div>
 
-      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+<script>
+/* FORCE COUNTDOWN TO 0 IMMEDIATELY (for preview) */
+document.getElementById("countdown").innerHTML = "💖 It's Wedding Day! 💖";
+setTimeout(startWeddingAnimation, 1000);
 
-      if (distance < 0) {
-        countdownEl.innerHTML = "💖 It's Wedding Day! 💖";
-      }
-    }, 1000);
+/* --------------------------------------------------------- */
+/* 1️⃣ WEDDING DAY ANIMATION */
+/* --------------------------------------------------------- */
+function startWeddingAnimation() {
+  const overlay = document.getElementById("weddingOverlay");
+  overlay.style.display = "flex";
 
-    // Slideshow
-    let slideIndex = 0;
-    showSlides();
-    function showSlides() {
-      let slides = document.getElementsByClassName("mySlides");
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}
-      slides[slideIndex-1].style.display = "block";
-      setTimeout(showSlides, 3500);
+  for (let i = 0; i < 15; i++) {
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100+"%";
+    h.style.top = "60%";
+    h.style.animationDuration = (3 + Math.random()*3) + "s";
+    overlay.appendChild(h);
+  }
+
+  setTimeout(showLoveLetter, 3500);
+}
+
+/* --------------------------------------------------------- */
+/* 2️⃣ LOVE LETTER (typing effect) */
+/* --------------------------------------------------------- */
+function showLoveLetter() {
+  document.getElementById("weddingOverlay").style.display = "none";
+
+  const letter = document.getElementById("loveLetter");
+  letter.style.display = "block";
+
+  const text = `
+My love Priya,
+
+We met on Jeevansathi… and from that first message,
+something magical started.
+
+From talking endlessly… to the day our families met…  
+we secretly spent the entire day together — movies, food,
+holding hands, your head on my shoulder…
+
+Then Delhi… Lucknow… Mussoorie…
+our first kiss… our first trip…
+our first “I love you”.
+
+And now, in just 3 days…  
+we are becoming one.
+
+Forever yours,  
+Shubham ❤️
+  `;
+
+  let i = 0;
+  const speed = 30;
+  function type() {
+    if (i < text.length) {
+      document.getElementById("typedText").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
     }
+  }
+  type();
+}
 
-    // 💖 Quotes (fade in effect)
-    const quotes = [
-      "Priya ❤️ You’re the most beautiful part of my life.\nI can’t wait to call you my forever. 💍",
-      "Every moment with you feels like a fairytale come true. ✨",
-      "You are my today and all of my tomorrows. ❤️",
-      "I found my home in your arms, my love. 🏡💕",
-      "Together is my favorite place to be. 💑",
-      "Forever isn’t long enough with you, Priya. ♾️💖"
-    ];
+/* --------------------------------------------------------- */
+/* 3️⃣ STORY SLIDESHOW */
+/* --------------------------------------------------------- */
+const storyImages = [
+  "P6.jpg",
+  "P7_1.jpg",
+  "P8.jpg",
+  "P9.jpg",
+  "P10.jpg",
+  "P13.jpg"
+];
 
-    let quoteIndex = 0;
-    const msgEl = document.getElementById("hiddenMessage");
+const storyTexts = [
+  "17 March — She accepted the request on Jeevansathi… destiny’s first step.",
+  "20 March — Our first WhatsApp message at 10:44 AM.",
+  "Next day after family meeting — we spent the entire day together… movies, food, hands held tightly.",
+  "31 May — Her birthday surprise… and our first kiss.",
+  "Delhi trip — proposal in the room, shopping, romance, memories forever.",
+  "Mussoorie — laughs, tears, drinks, dancing, and that kiss while riding scooty."
+];
 
-    function showNextQuote() {
-      msgEl.style.display = "block";
-      msgEl.classList.remove("show");
-      void msgEl.offsetWidth; // restart transition
-      msgEl.innerText = quotes[quoteIndex];
-      msgEl.classList.add("show");
-      quoteIndex = (quoteIndex + 1) % quotes.length;
-    }
+let storyIndex = 0;
 
-    // ❤️ Rising Hearts
-    document.addEventListener("click", function(e) {
-      let heart = document.createElement("div");
-      heart.className = "touch-heart";
-      heart.innerText = "❤️";
-      heart.style.left = e.pageX + "px";
-      heart.style.top = e.pageY + "px";
-      heart.style.fontSize = (12 + Math.random()*10) + "px";
-      document.body.appendChild(heart);
+function startStory() {
+  document.getElementById("loveLetter").style.display = "none";
+  document.getElementById("storyOverlay").style.display = "block";
+  showStorySlide();
+}
 
-      setTimeout(() => heart.remove(), 1500);
-    });
-  </script>
+function showStorySlide() {
+  if (storyIndex >= storyImages.length) {
+    document.getElementById("storyCaption").innerHTML = "<br><br>❤️ I love you Priya… forever yours. ❤️";
+    return;
+  }
+
+  document.getElementById("storyImg").src = storyImages[storyIndex];
+  document.getElementById("storyCaption").innerHTML = storyTexts[storyIndex];
+
+  storyIndex++;
+  setTimeout(showStorySlide, 3000);
+}
+
+/* --------------------------------------------------------- */
+/* Existing slideshow + quotes + hearts */
+/* --------------------------------------------------------- */
+
+let slideIndex = 0;
+showSlides();
+function showSlides() {
+  let slides = document.getElementsByClassName("mySlides");
+  for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
+  slideIndex++;
+  if (slideIndex > slides.length) slideIndex = 1;
+  slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides, 3500);
+}
+
+const quotes = [
+  "Priya ❤️ You’re the most beautiful part of my life.\nI can’t wait to call you my forever. 💍",
+  "Every moment with you feels like a fairytale come true. ✨",
+  "You are my today and all of my tomorrows. ❤️",
+  "I found my home in your arms, my love. 🏡💕",
+  "Together is my favorite place to be. 💑",
+  "Forever isn’t long enough with you, Priya. ♾️💖"
+];
+
+let quoteIndex = 0;
+const msgEl = document.getElementById("hiddenMessage");
+
+function showNextQuote() {
+  msgEl.style.display = "block";
+  msgEl.classList.remove("show");
+  void msgEl.offsetWidth;
+  msgEl.innerText = quotes[quoteIndex];
+  msgEl.classList.add("show");
+  quoteIndex = (quoteIndex + 1) % quotes.length;
+}
+
+document.addEventListener("click", function(e) {
+  let heart = document.createElement("div");
+  heart.className = "touch-heart";
+  heart.innerText = "❤️";
+  heart.style.left = e.pageX + "px";
+  heart.style.top = e.pageY + "px";
+  heart.style.fontSize = (12 + Math.random()*10) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 1500);
+});
+</script>
+
 </body>
 </html>
