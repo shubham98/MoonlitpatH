@@ -1,164 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shubham ❤️ Priya</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shubham ❤️ Priya — Wedding Day</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
+    /* Page basics */
+    :root{
+      --bg:#070617;
+      --panel: rgba(255,255,255,0.06);
+      --accent: #ffd6a5; /* soft peach */
+      --muted: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.06);
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+      background: radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02) 0%, transparent 20%),
+                  radial-gradient(ellipse at 90% 90%, rgba(255,255,255,0.02) 0%, transparent 15%),
+                  var(--bg);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* banner */
+    .banner{
+      text-align:center;
+      padding:10px 16px;
+      background: linear-gradient(90deg, rgba(255,214,179,0.06), rgba(255,214,179,0.02));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-weight:600;
       color: #fff;
-      overflow-x: hidden;
-      overflow-y: hidden; /* prevent scrolling */
+      font-size:14px;
+      position:sticky;
+      top:0;
+      z-index:50;
     }
 
-    /* 🌌 Night sky background */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      z-index: -2;
+    .container{
+      max-width:960px;
+      margin:32px auto;
+      padding:28px;
+      text-align:center;
+      position:relative;
+      z-index:5;
     }
 
-    /* Twinkling stars */
-    .stars {
-      position: fixed;
-      width: 100%; height: 100%;
-      background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-      animation: twinkle 60s linear infinite;
-      z-index: -1;
+    h1{
+      margin:0 0 12px 0;
+      font-size:2.2rem;
+      letter-spacing:1px;
+      text-shadow:0 6px 24px rgba(0,0,0,0.6);
     }
 
-    @keyframes twinkle {
-      from { background-position: 0 0; }
-      to { background-position: -10000px 5000px; }
-    }
-
-    .banner {
-      background: rgba(255, 245, 247, 0.2);
-      color: #ffcccc;
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: 'Georgia', serif;
-      padding: 6px 10px;
-      margin: 0;
-      border-top: 2px solid #ffb6c1;
-      border-bottom: 2px solid #ffb6c1;
-    }
-
-    h1 {
-      margin-top: 10px;
-      font-size: 1.6rem;
-      color: #ff4d6d;
-      white-space: nowrap;
-    }
-
-    #countdown {
-      font-size: 1.2rem;
-      margin: 5px 0 10px 0;
-      font-weight: bold;
-    }
-
-    .slideshow-container {
-      width: 90%;
-      max-width: 400px;
-      margin: 10px auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    }
-
-    .mySlides {
-      display: none;
-    }
-
-    .mySlides img {
-      width: 100%;
-      max-height: 50vh;   /* 👈 limit image height to half screen */
-      object-fit: cover;  /* 👈 ensures image covers nicely */
-      border-radius: 12px;
-    }
-
-    /* 💖 Surprise Button */
-    .surprise-btn {
-      background: #ff4d6d;
+    #countdown{
+      font-size:1.05rem;
+      margin:10px 0 22px 0;
       color: #fff;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 0 10px rgba(255,77,109,0.7);
-      transition: 0.3s;
-    }
-    .surprise-btn:hover {
-      background: #ff3355;
-      box-shadow: 0 0 18px rgba(255,77,109,1);
+      opacity:0.95;
     }
 
-    /* ✨ Quotes (fade in + centered) */
-    .hidden-message {
-      display: none;
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #ffcccc;
-      font-family: 'Dancing Script', cursive;
-      white-space: pre-line;
-      max-width: 80%;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.4;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+    /* slideshow */
+    .slideshow-container{
+      max-width:720px;
+      margin:24px auto 8px auto;
+      position:relative;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
     }
 
-    .show {
-      display: block;
-      opacity: 1;
+    .slideshow-container img{
+      width:100%;
+      height:420px;
+      object-fit:cover;
+      display:block;
     }
 
-    footer {
-      margin: 10px 0;
-      font-size: 0.9rem;
-      color: #ddd;
-      font-weight: 500;
+    /* surprise button */
+    .surprise-btn{
+      margin-top:16px;
+      background: linear-gradient(90deg,var(--accent), #ffc9e3);
+      border:none;
+      padding:10px 18px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(255, 170, 120, 0.12);
+      color:#111;
+      transition:transform .14s ease;
+    }
+    .surprise-btn:active{ transform:translateY(2px) }
+
+    /* hidden message area */
+    .hidden-message{
+      min-height:60px;
+      margin-top:12px;
+      padding:12px 16px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      display:none;
+      white-space:pre-wrap;
+      font-size:1rem;
+      max-width:720px;
+      margin-left:auto;
+      margin-right:auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+    .hidden-message.show{ display:block; animation:msgPop .5s ease; }
+    @keyframes msgPop { from { transform: translateY(6px) scale(.99); opacity:0 } to { transform:none; opacity:1 } }
+
+    /* Rising hearts on click */
+    .touch-heart{
+      position:absolute;
+      pointer-events:none;
+      transform: translate(-50%, -50%);
+      user-select:none;
+      animation:rise 1400ms linear forwards;
+      z-index:80;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    @keyframes rise { 0%{ transform:translate(-50%,-50%) scale(1); opacity:1 } 100%{ transform:translate(-50%,-150%) scale(1.6); opacity:0 } }
+
+    /* STORY SECTION */
+    .story-section{
+      margin:48px auto;
+      max-width:820px;
+      padding:18px;
+      text-align:left;
     }
 
-    /* ❤️ Rising Hearts */
-    .touch-heart {
-      position: absolute;
-      font-size: 14px;
-      color: red;
-      animation: rise 1.5s linear forwards;
-      pointer-events: none;
+    .story-section h2{
+      text-align:center;
+      font-size:1.6rem;
+      margin-bottom:18px;
     }
 
-    @keyframes rise {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+    .timeline{
+      position:relative;
+      padding-left:28px;
+      margin-top:8px;
     }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:12px;
+      top:0;
+      bottom:0;
+      width:2px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border-radius:4px;
+      transform-origin:center;
+    }
+    .story-item{
+      position:relative;
+      margin:18px 0;
+      padding:14px 16px;
+      background:var(--panel);
+      border-radius:12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+      opacity:0;
+      transform: translateY(24px);
+      transition: all .7s cubic-bezier(.2,.9,.2,1);
+    }
+    .story-item.visible{ opacity:1; transform:none }
+    .story-item .date{
+      font-weight:700;
+      font-size:0.98rem;
+      color:#fff;
+      margin-bottom:6px;
+    }
+    .story-item .text{ color: rgba(255,255,255,0.92) }
+
+    /* Polaroids */
+    .polaroids{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:28px;
+    }
+    .polaroid{
+      width:140px;
+      background: #fff;
+      padding:10px 10px 18px 10px;
+      border-radius:10px;
+      transform: rotate(var(--rot));
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      transition: transform .28s ease, box-shadow .28s ease;
+      cursor:pointer;
+    }
+    .polaroid img{ width:100%; height:110px; object-fit:cover; border-radius:6px; display:block }
+    .polaroid:hover{ transform: scale(1.06) rotate(0deg); box-shadow: 0 18px 40px rgba(0,0,0,0.65) }
+    .polaroid .caption{ font-size:0.86rem; color:#222; text-align:center; margin-top:8px }
+
+    /* Reasons floating notes */
+    .notes-area{
+      margin-top:26px;
+      text-align:center;
+    }
+    .note-btn{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:8px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .floating-note{
+      position:fixed;
+      pointer-events:none;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) scale(.95);
+      opacity:0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+      color:#111;
+      padding:12px 14px;
+      border-radius:14px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      white-space:nowrap;
+      z-index:100;
+    }
+    .floating-note.show{
+      animation:floatUp 1.6s cubic-bezier(.2,.9,.2,1) forwards;
+    }
+    @keyframes floatUp{
+      0%{ opacity:0; transform:translate(-50%, -10%) scale(.9) }
+      10%{ opacity:1; transform:translate(-50%, -40%) scale(1.02) }
+      100%{ opacity:0; transform:translate(-50%, -200%) scale(.96) }
+    }
+
+    /* whispers (scroll-trigger) */
+    .whispers{
+      margin:40px auto;
+      max-width:860px;
+      text-align:center;
+      padding:0 12px;
+    }
+    .whisper{
+      margin:22px auto;
+      padding:18px;
+      background: rgba(255,255,255,0.03);
+      border-radius:12px;
+      opacity:0;
+      transform: translateY(26px);
+      transition: all .8s cubic-bezier(.2,.9,.2,1);
+      max-width:720px;
+    }
+    .whisper.visible{ opacity:1; transform:none; }
+
+    /* vows */
+    .vows{
+      margin:34px auto;
+      max-width:720px;
+      text-align:left;
+      padding:14px;
+    }
+    .vow{
+      margin:10px 0;
+      padding:12px 14px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03));
+      border-radius:12px;
+      opacity:0;
+      transform: translateY(18px);
+      transition: all .6s ease;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.48);
+    }
+    .vow.show{ opacity:1; transform:none; }
+
+    /* small screens */
+    @media (max-width:640px){
+      .slideshow-container img{ height:230px }
+      .polaroid{ width:120px }
+      .polaroid img{ height:88px }
+      h1{ font-size:1.6rem }
+    }
+
+    /* fireworks canvas (behind content) */
+    #fireworksCanvas{
+      position:fixed;
+      left:0; top:0;
+      width:100%; height:100%;
+      pointer-events:none;
+      z-index:0;
+    }
+    /* ensure content visible above fireworks */
+    .container, .story-section, .whispers, .polaroids { position:relative; z-index:5 }
+
   </style>
 </head>
 <body>
 
-  <!-- Stars background -->
-  <div class="stars"></div>
-
-  <!-- Banner -->
   <div class="banner">💍 Save the Date — 29th November 2025 💌</div>
 
   <div class="container">
-    <h1>❤️ Shubham & Priya ❤️ </h1>
+    <h1>❤️ Shubham & Priya ❤️</h1>
     <div id="countdown"></div>
 
-    <!-- Slideshow -->
-    <div class="slideshow-container">
+    <div class="slideshow-container" aria-hidden="false">
       <div class="mySlides fade"><img src="P6.jpg" alt="Memory 1"></div>
       <div class="mySlides fade"><img src="P7_1.jpg" alt="Memory 2"></div>
       <div class="mySlides fade"><img src="P8.jpg" alt="Memory 3"></div>
@@ -168,17 +313,85 @@
       <div class="mySlides fade"><img src="P14.jpg" alt="Memory 7"></div>
     </div>
 
-    <!-- 💖 Surprise Button -->
-    <button class="surprise-btn" onclick="showNextQuote()">Click Me 💌</button>
+    <div class="notes-area">
+      <button class="surprise-btn note-btn" id="noteBtn">Reasons I Love You — Click</button>
+      <div class="floating-note" id="floatingNote"></div>
+    </div>
+
+    <button class="surprise-btn" onclick="showNextQuote()" style="margin-top:14px;">Click Me 💌</button>
     <div class="hidden-message" id="hiddenMessage"></div>
   </div>
 
+  <!-- STORY -->
+  <section class="story-section" id="ourStory">
+    <h2>💖 Our Story 💖</h2>
+    <div class="timeline">
+      <div class="story-item" data-order="1">
+        <div class="date">17th March • 9:56 PM</div>
+        <div class="text">She accepted my request on Jeevansathi. Our story quietly began.</div>
+      </div>
+
+      <div class="story-item" data-order="2">
+        <div class="date">20th March • 10:44 AM</div>
+        <div class="text">Our very first text on WhatsApp. A simple “Hi” that changed everything.</div>
+      </div>
+
+      <div class="story-item" data-order="3">
+        <div class="date">16th April</div>
+        <div class="text">First hand holding and her forehead kiss — a small, perfect moment.</div>
+      </div>
+
+      <div class="story-item" data-order="4">
+        <div class="date">27th April • 2:26 AM</div>
+        <div class="text">She said “I love you.”</div>
+      </div>
+
+      <div class="story-item" data-order="5">
+        <div class="date">27th April • 2:59 AM</div>
+        <div class="text">I said “I love you” back — the easiest words I ever said.</div>
+      </div>
+
+      <div class="story-item" data-order="6">
+        <div class="date">31st May</div>
+        <div class="text">Our first kiss — soft, shy, and perfect.</div>
+      </div>
+    </div>
+
+    <!-- polaroid gallery -->
+    <div class="polaroids" aria-hidden="false">
+      <div class="polaroid" style="--rot:-8deg"><img src="P6.jpg" alt="photo"><div class="caption">That day — laughter</div></div>
+      <div class="polaroid" style="--rot:6deg"><img src="P7_1.jpg" alt="photo"><div class="caption">First trip</div></div>
+      <div class="polaroid" style="--rot:-4deg"><img src="P8.jpg" alt="photo"><div class="caption">A quiet evening</div></div>
+      <div class="polaroid" style="--rot:8deg"><img src="P9.jpg" alt="photo"><div class="caption">Holding hands</div></div>
+      <div class="polaroid" style="--rot:-3deg"><img src="P10.jpg" alt="photo"><div class="caption">Your smile</div></div>
+    </div>
+  </section>
+
+  <!-- whispers (scroll triggered) -->
+  <section class="whispers" id="whispers">
+    <div class="whisper">This is the place I first knew: that I wanted forever with you.</div>
+    <div class="whisper">You are the calm in my chaos — the home I never expected to find.</div>
+    <div class="whisper">I fell for the way you laugh at bad jokes and make rainy days kind.</div>
+  </section>
+
+  <!-- vows -->
+  <section class="vows" id="vows">
+    <h2 style="text-align:center">✨ My Vows ✨</h2>
+    <div class="vow">I promise to choose you every single day.</div>
+    <div class="vow">I promise to listen and hold you when life is loud.</div>
+    <div class="vow">I promise to laugh, even at small things, so our days are bright.</div>
+    <div class="vow">I promise to make a home that is gentle and warm for both of us.</div>
+  </section>
+
+  <!-- fireworks canvas -->
+  <canvas id="fireworksCanvas"></canvas>
+
   <script>
-    // Countdown
+    // ============== Countdown (keeps your original) ==============
     const weddingDate = new Date("Nov 29, 2025 00:00:00").getTime();
     const countdownEl = document.getElementById("countdown");
 
-    setInterval(function() {
+    function updateCountdown(){
       const now = new Date().getTime();
       const distance = weddingDate - now;
 
@@ -187,28 +400,45 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-      if (distance < 0) {
+      if(distance <= 0){
         countdownEl.innerHTML = "💖 It's Wedding Day! 💖";
+        // optionally intensify fireworks when it's wedding day
+        FIREWORKS.setIntensity(0.14);
+      } else {
+        countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
       }
-    }, 1000);
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    // Slideshow
+    // ============== Slideshow (keeps original behaviour) ==============
     let slideIndex = 0;
     showSlides();
     function showSlides() {
       let slides = document.getElementsByClassName("mySlides");
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
+      for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
       slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}
-      slides[slideIndex-1].style.display = "block";
+      if (slideIndex > slides.length) slideIndex = 1;
+      slides[slideIndex - 1].style.display = "block";
       setTimeout(showSlides, 3500);
     }
 
-    // 💖 Quotes (fade in effect)
+    // ============== Click rising hearts ==============
+    document.addEventListener("click", function (e) {
+      // ignore clicks on polaroids to allow normal interactivity
+      if (e.target.closest('.polaroid')) return;
+      let heart = document.createElement("div");
+      heart.className = "touch-heart";
+      heart.innerText = "❤️";
+      heart.style.left = e.pageX + "px";
+      heart.style.top = e.pageY + "px";
+      heart.style.fontSize = (12 + Math.random() * 14) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1400);
+    });
+
+    // ============== Floating quote (Click Me) ==============
     const quotes = [
       "Priya ❤️ You’re the most beautiful part of my life.\nI can’t wait to call you my forever. 💍",
       "Every moment with you feels like a fairytale come true. ✨",
@@ -217,31 +447,230 @@
       "Together is my favorite place to be. 💑",
       "Forever isn’t long enough with you, Priya. ♾️💖"
     ];
-
     let quoteIndex = 0;
     const msgEl = document.getElementById("hiddenMessage");
-
-    function showNextQuote() {
+    function showNextQuote(){
       msgEl.style.display = "block";
       msgEl.classList.remove("show");
-      void msgEl.offsetWidth; // restart transition
+      void msgEl.offsetWidth;
       msgEl.innerText = quotes[quoteIndex];
       msgEl.classList.add("show");
       quoteIndex = (quoteIndex + 1) % quotes.length;
     }
 
-    // ❤️ Rising Hearts
-    document.addEventListener("click", function(e) {
-      let heart = document.createElement("div");
-      heart.className = "touch-heart";
-      heart.innerText = "❤️";
-      heart.style.left = e.pageX + "px";
-      heart.style.top = e.pageY + "px";
-      heart.style.fontSize = (12 + Math.random()*10) + "px";
-      document.body.appendChild(heart);
+    // ============== Reasons I love you - floating notes (Idea 3) ==============
+    const reasons = [
+      "Your smile melts every worry away.",
+      "You make me laugh even on hard days.",
+      "You are kinder than anyone I know.",
+      "You make our little moments unforgettable.",
+      "You make me want to be a better man.",
+      "I love how you hold my hand when I frown.",
+      "Your voice feels like home."
+    ];
+    let reasonIndex = 0;
+    const noteBtn = document.getElementById('noteBtn');
+    const floatingNote = document.getElementById('floatingNote');
 
-      setTimeout(() => heart.remove(), 1500);
+    noteBtn.addEventListener('click', () => {
+      const text = reasons[reasonIndex];
+      floatingNote.innerText = text;
+      floatingNote.classList.remove('show');
+      void floatingNote.offsetWidth;
+      floatingNote.classList.add('show');
+      reasonIndex = (reasonIndex + 1) % reasons.length;
+      // hide after animation completes (1.6s)
+      setTimeout(() => floatingNote.classList.remove('show'), 1500);
     });
+
+    // ============== Scroll-triggered reveals (timeline, whispers, vows) ==============
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll('.story-item').forEach(el => observer.observe(el));
+    document.querySelectorAll('.whisper').forEach(el => observer.observe(el));
+    // reveal vows sequentially when vows section intersects
+    const vowsSection = document.getElementById('vows');
+    const vowObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const vows = entry.target.querySelectorAll('.vow');
+          vows.forEach((v,i) => setTimeout(()=> v.classList.add('show'), i*360));
+          vowObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    vowObserver.observe(vowsSection);
+
+    // ============== POLAROID click to enlarge (small UX) ==============
+    document.querySelectorAll('.polaroid').forEach(p => {
+      p.addEventListener('click', ()=> {
+        // quick enlarge preview
+        const overlay = document.createElement('div');
+        overlay.style.position='fixed';
+        overlay.style.left=0; overlay.style.top=0; overlay.style.right=0; overlay.style.bottom=0;
+        overlay.style.background='rgba(0,0,0,0.76)';
+        overlay.style.zIndex=200;
+        overlay.style.display='flex';
+        overlay.style.justifyContent='center';
+        overlay.style.alignItems='center';
+        overlay.addEventListener('click', ()=> overlay.remove());
+
+        const img = p.querySelector('img').cloneNode();
+        img.style.maxWidth='86%';
+        img.style.maxHeight='86%';
+        img.style.borderRadius='12px';
+        overlay.appendChild(img);
+        document.body.appendChild(overlay);
+      });
+    });
+
+    // ============== Fireworks (heart-shaped) ==============
+    // Simple heart-shaped particle explosions behind content.
+    // A tiny manager that can set intensity.
+    const FIREWORKS = (function(){
+      const canvas = document.getElementById('fireworksCanvas');
+      const ctx = canvas.getContext('2d');
+      let W = canvas.width = innerWidth;
+      let H = canvas.height = innerHeight;
+      window.addEventListener('resize', ()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; });
+
+      let rockets = [];
+      let particles = [];
+      let baseIntensity = 0.06; // chance per frame to launch rocket
+      let intensity = baseIntensity;
+
+      function rand(min,max){ return Math.random()*(max-min)+min }
+
+      // heart parametric
+      function heartPoint(t, scale){
+        // t in [0,2PI]
+        const x = 16*Math.pow(Math.sin(t),3);
+        const y = 13*Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+        return { x: x*scale, y: -y*scale };
+      }
+
+      class Rocket {
+        constructor(){
+          this.x = rand(80, W-80);
+          this.y = H + 10;
+          this.vy = -(rand(5,9));
+          this.color = randomColor();
+          this.explodeY = rand(H*0.18, H*0.45);
+        }
+        update(){
+          this.y += this.vy;
+          this.vy += 0.06; // gravity small
+          if(this.y <= this.explodeY){
+            this.explode();
+            rockets.splice(rockets.indexOf(this),1);
+          } else {
+            // draw rocket glow
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, 2.6, 0, Math.PI*2);
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = 0.95;
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          }
+        }
+        explode(){
+          // create heart shaped particles by sampling parametric curve
+          const scale = rand(6, 10); // controls size
+          const samples = 28 + Math.floor(rand(8,22));
+          for(let i=0;i<samples;i++){
+            const t = (i/samples)*Math.PI*2;
+            const p = heartPoint(t, scale);
+            // add some velocity randomness
+            particles.push(new Particle(this.x + p.x, this.y + p.y, this.color, p.x*0.12, p.y*0.12));
+          }
+        }
+      }
+
+      class Particle {
+        constructor(x, y, color, vx=0, vy=0){
+          this.x = x; this.y = y;
+          this.vx = vx + rand(-1,1);
+          this.vy = vy + rand(-1,1);
+          this.color = color;
+          this.life = rand(70,140);
+          this.age = 0;
+          this.size = rand(1.2,3.2);
+          this.decay = rand(0.008, 0.016);
+        }
+        update(){
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vx *= 0.992;
+          this.vy += 0.02; // gravity
+          this.age++;
+          this.size *= 0.998;
+          const alpha = Math.max(0, 1 - (this.age / this.life));
+          ctx.globalAlpha = alpha;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          if(this.age > this.life) particles.splice(particles.indexOf(this),1);
+        }
+      }
+
+      function randomColor(){
+        const colors = ["#ffadc6","#ffd6a5","#caffbf","#9bf6ff","#bdb2ff","#fff6e6","#ffe7d6"];
+        return colors[Math.floor(Math.random()*colors.length)];
+      }
+
+      function loop(){
+        ctx.clearRect(0,0,W,H);
+        // occasionally launch a rocket depending on intensity
+        if(Math.random() < intensity) rockets.push(new Rocket());
+        rockets.forEach(r => r.update());
+        particles.forEach(p => p.update());
+        requestAnimationFrame(loop);
+      }
+
+      loop();
+
+      return {
+        setIntensity: function(v){
+          intensity = v;
+        },
+        resetIntensity: function(){ intensity = baseIntensity; },
+        // exposed to script to trigger a big burst manually
+        burstAt: function(x,y,color,size){
+          // create an instant heart burst centered at x,y
+          const scale = size || 9;
+          const samples = 40;
+          for(let i=0;i<samples;i++){
+            const t = (i/samples)*Math.PI*2;
+            const p = heartPoint(t, scale);
+            particles.push(new Particle(x + p.x, y + p.y, color || randomColor(), p.x*0.12, p.y*0.12));
+          }
+        }
+      };
+    })();
+
+    // small flourish when page opens
+    setTimeout(()=>{ FIREWORKS.burstAt(innerWidth*0.5, innerHeight*0.25, "#ffd6a5", 12); }, 700);
+
+    // when countdown hits 0, add more intensity (handled in countdown check)
+    FIREWORKS.setIntensity = FIREWORKS.setIntensity || function(x){}; // fallback safety
+
+    // ============== Tiny accessibility improvements ==============
+    // Allow keyboard to trigger notes: Enter on noteBtn
+    noteBtn.addEventListener('keyup', (e) => { if(e.key === 'Enter') noteBtn.click(); });
+
+    // small polite focus style
+    document.addEventListener('focusin', (e) => {
+      if(e.target.matches('button, a')) e.target.style.outline = '3px solid rgba(255,214,165,0.12)';
+    });
+
   </script>
 </body>
 </html>
